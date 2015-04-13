@@ -1,5 +1,5 @@
 game.PlayerEntity = me.Entity.extend({
-    init: function(x, y, settings){
+    init: function(x, y){
         this.setSuper(x, y);
         this.setPlayerTimer();
         this.setAttributes();
@@ -13,7 +13,7 @@ game.PlayerEntity = me.Entity.extend({
     this.renderable.setCurrentAnimation("idle");
 },
 
-setSuper: function(x, y, settings){
+setSuper: function(x, y){
             this._super(me.Entity, 'init', [x, y, {
                 image: "player",
                 width: 64,
@@ -117,9 +117,7 @@ addAnimation: function(){
                 //switched to another animation
                 this.renderable.setAnimationFrame();
         }
-    }
-        
-        
+    }  
        else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")){
         if(!this.renderable.isCurrentAnimation("walk")){
             this.renderable.setCurrentAnimation("walk");
@@ -135,6 +133,13 @@ addAnimation: function(){
     
     collideHandler: function(response){
         if(response.b.type==='EnemyBaseEntity'){
+            this.collideWithEnemyBase(response);
+        }else if(response.b.type==='EnemyCreep'){
+            this.colliideWithEnemyCreeps(response);
+        }
+    },
+    
+    collideWithEnemyBase: function(response){
             var ydif = this.pos.y - response.b.pos.y;
             var xdif = this.pos.x - response.b.pos.x;
            
@@ -144,49 +149,58 @@ addAnimation: function(){
            }
             else if(xdif>-35 && this.facing==='right' && (xdif<0)){
                 this.body.vel.x = 0;
-               //this.pos.x = this.pos.x -1;
             }else if(xdif<70 && this.facing==='left' && xdif>0){
                   this.body.vel.x = 0;
-               //this.pos.x = this.pos.x +1;
             }
             if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer){
                 this.lastHit = this.now;
                 response.b.loseHealth(game.data.playerAttackTimer);
             }
-        }else if(response.b.type==='EnemyCreep'){
+    },
+
+    collideWithEnemyCreep: function(response){
             var xdif = this.pos.x - response.b.pos.x;
             var ydif = this.pos.y - response.b.pos.y;
             
-            if(xdif>0){
-                //this.pos.x = this.pos.x + 1;
+            this.stopMovement(xdif);
+            
+            if(this.checkAttack(xdif, ydif)){
+                this.hitCreep(response);
+            };
+            
+    },
+    
+    stopMovement: function(xdif){
+        if(xdif>0){
                 if(this.facing==="left"){
                     this.body.vel.x = 0;
                 }
             }else{
-                //this.pos.x = this.pos.x - 1;
                 if(this.facing==="right"){
                     this.body.vel.x = 0;
                 }
             }
-            if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
+    },
+    
+    checkAttack: function(xdif, ydif){
+        if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
                     && (Math.abs(ydif) <=40) && 
                     (((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
                     ){
                 this.lastHit = this.now;
-                ///if the creeps health is leess than our attack, execute code iin if statement
-                if(response.b.health <= game.data.playerAttack){
+                ///if the creeps health is less than our attack, execute code iin if statement
+                return true;
+        }
+        return true;
+    },
+    
+    hitCreep: function(response){
+        if(response.b.health <= game.data.playerAttack){
                     //adds one gold for a creep kill
                     game.data.gold += 1;
                     console.log("Current gold: " + game.data.gold);
                 }
-                
-                
+
                 response.b.loseHealth(game.data.playerAttack);
-            }
-        }
     }
 });
-
-
-
-
