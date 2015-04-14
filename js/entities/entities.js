@@ -13,7 +13,7 @@ game.PlayerEntity = me.Entity.extend({
     this.renderable.setCurrentAnimation("idle");
 },
 
-setSuper: function(x, y){
+    setSuper: function(x, y){
             this._super(me.Entity, 'init', [x, y, {
                 image: "player",
                 width: 64,
@@ -26,26 +26,26 @@ setSuper: function(x, y){
         }]);
     },
 
-setPlayerTimer: function(){
+    setPlayerTimer: function(){
     this.now = new Date().getTime();
     this.lastHit = this.now;
     this.lastAttack = new Date().getTime(); //Haven't used this
 },
 
-setAttributes: function(){
+    setAttributes: function(){
     this.health = game.data.playerHealth;
     this.body.setVelocity(game.data.playerMoveSpeed, 20);   
     this.attack = game.data.playerAttack;
 },
 
-setFlags: function(){
+    setFlags: function(){
      //Keeps track of which direction your character is going
     this.facing = "right";
     this.dead = false;
     this.attacking = false;
 },
 
-addAnimation: function(){
+    addAnimation: function(){
     this.renderable.addAnimation("idle", [78]);
     this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
     this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
