@@ -4,7 +4,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {	
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('title-screen')), -10); // TODO
-	        
+	        console.log("title");
         
                 me.game.world.addChild(new (me.Renderable.extend({
                     init: function(){
@@ -37,7 +37,7 @@ game.TitleScreen = me.ScreenObject.extend({
                     init: function(){
                         this._super(me.Renderable, 'init', [380, 340, 250, 50]);
                         this.font = new me.Font("Arial", 46, "white");
-                        me.input.registerPointerEvent('pointerdown', this, this.newGame(this), true);
+                        //me.input.registerPointerEvent('pointerdown', this, this.newGame(this), true);
                     },
                     
                     draw: function(renderer){
@@ -56,7 +56,7 @@ game.TitleScreen = me.ScreenObject.extend({
                         game.data.exp3 = me.save.exp;
                         game.data.exp4 = me.save.exp;
                         me.input.releasePointerEvent('pointerdown', this);
-                        me.state.change(me.state.PLAY);
+                        me.state.change(me.state.SPENDEXP);
                     }
                 })));
 },
