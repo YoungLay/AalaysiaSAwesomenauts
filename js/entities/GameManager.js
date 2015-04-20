@@ -78,10 +78,30 @@ game.SpendGold = Object.extend({
         this.lastBuy = new Date().getTime();
         this.paused = false;
         this.alwaysUpdate = true;
+        this.updateWhenPaused = true;
+        this.buying = false;
     },
     
     update: function(){
+        this.now = new Date().getTime();
+        
+        if(me.input.isKeyPressed("buy") && this.now-this.lastBuy >= 1000){
+            this.lastBuy = this.now;
+            if(!this.buying){
+                this.startBuying();
+            }else{
+                this.stopBuying();
+            }
+        }
+        
         return true;
-    }
+    },
+    
+    startBuying: function(){
+        this.buying = true;
+    },
 
+    stopBuying: function(){
+        this.buyiing = false;
+    }
 });
