@@ -6,10 +6,10 @@ var game = {
 	data : {
 		// score
 		score : 0,
-                enemyBaseHealth: 1,
-                playerBaseHealth: 1,
+                enemyBaseHealth: 20,
+                playerBaseHealth: 20,
                 enemyCreepHealth: 10,
-                playerHealth: 10,
+                playerHealth: 15,
                 enemyCreepAttack: 1,
                 playerAttack: 1,
 //                orcBaseDamage: 10,
@@ -18,7 +18,7 @@ var game = {
 //                orcBaseDefense: 0,
                 playerAttackTimer: 1000,
                 enemyCreepAttackTimer: 1000,
-                playerMoveSpeed: 5,
+                playerMoveSpeed: 10,
                 creepMoveSpeed: 5,
                 gameTimerManager: "",
                 heroDeathManager: "",

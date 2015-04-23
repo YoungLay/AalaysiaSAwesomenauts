@@ -191,7 +191,7 @@ game.PlayerEntity = me.Entity.extend({
                 ///if the creeps health is less than our attack, execute code iin if statement
                 return true;
         }
-        return true;
+        return false;
     },
     
     hitCreep: function(response){
