@@ -9,8 +9,15 @@ $exp4 = filter_input(INPUT_POST, "exp4", FILTER_SANITIZE_STRING);
 
 
 $query = $_SESSION["connection"]->query("UPDATE users SET "
-        . "exp4 = $exp,"
-        . "exp4 = $exp1,"
-        . "exp4 = $exp2,"
-        . "exp4 = $exp3,"
+        . "exp4 = $exp, "
+        . "exp4 = $exp1, "
+        . "exp4 = $exp2, " 
+        . "exp4 = $exp3, "
         . "exp4 = $exp4 WHERE username = \"" . $_SESSION["name"]. "\"");
+
+if($query){
+    echo "true";
+}else{
+    echo "<p>" . $_SESSION["connection"]->error . "</p>";
+}
+    
