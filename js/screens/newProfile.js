@@ -4,6 +4,9 @@ game.NewProfile = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {	
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('new-screen')), -10); // TODO
+                document.getElementById("input").style.visibility = "visibile";
+                document.getElementById("register").style.visibility = "visible";
+                
                 
                 me.input.unbindKey(me.input.KEY.B);
                 me.input.unbindKey(me.input.KEY.Q);
@@ -32,13 +35,7 @@ game.NewProfile = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-                me.input.unbindKey(me.input.KEY.F1, "F1");
-                me.input.unbindKey(me.input.KEY.F2, "F2");
-                me.input.unbindKey(me.input.KEY.F3, "F3");
-                me.input.unbindKey(me.input.KEY.F4, "F4");
-                me.input.unbindKey(me.input.KEY.F5, "F5");
-                me.event.subscribe(this.handler);
+                document.getElementById("input").style.visibility = "hidden";
+                document.getElementById("register").style.visibility = "hidden";
 	}
 });
-
-
