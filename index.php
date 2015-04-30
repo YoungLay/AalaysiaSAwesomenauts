@@ -34,8 +34,8 @@
                     </div>
                     
                     <button type='button' id='register'>Register</button>
-                    <button type='button' id='register'>Load</button>
-                    <button type='button' id='register'>Main Menu</button>
+                    <button type='button' id='load'>Load</button>
+                    <button type='button' id='mainmenu'>Main Menu</button>
 
                 </form>
                 
@@ -119,7 +119,7 @@
             });
              $("#load").bind("click", function(){
                 $.ajax({
-                    type: "POST";
+                    type: "POST",
                     url: "php/controller/login-user.php",
                     data: {
                         username: $('#username').val(),
