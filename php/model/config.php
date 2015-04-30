@@ -1,9 +1,9 @@
 <?php
-require_once(__DIR__ . "/database.php");
+require_once(__DIR__ . "/Database.php");
 session_start();
 session_regenerate_id(true);
 
-$path = "/AalaysiaSAwesomenauts/php/";
+$path = '/AalaysiaSAwesomenauts/php/';
 
 $host = "localhost";
 $username = "root";
